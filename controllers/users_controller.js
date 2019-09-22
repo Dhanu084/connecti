@@ -1,7 +1,26 @@
 const User = require('../models/users');
 
 module.exports.profile = function(req,res){
-    res.end("<h1>User Profile</h1>");
+    let user_id = req.cookies.user_id
+    if(user_id){
+            User.findById(user_id,function(err,user){
+        if(err){console.log(err);return}
+        if(user){
+            res.render('userProfile',{
+                name:user.name,
+                email:user.email,
+                id:user.id
+            })
+        }
+        else{
+            res.redirect('back');
+        }
+    });
+    }
+    else{
+        res.redirect('back');
+    }
+    
 }
 
 module.exports.posts = function(req,res){
@@ -50,5 +69,28 @@ module.exports.create = function(req,res){
 //signin and create session for the user
 module.exports.createSession = function(req,res){
     console.log('hi')
+    User.findOne({email:req.body.email},function(err,user){
+        if(err){console.log(err); return }
+        
+        if(user){
+            if (user.password!=req.body.password){
+                console.log('Incorrect Password');
+                res.redirect('back');
+            }
+            else{
+                res.cookie('user_id',user.id);
+                res.redirect('/users/profile')
+            }
+            
+        }
+        else{
+            res.redirect('back');
+        }
+    })
+}
+
+module.exports.deleteSession=function(req,res){
     
+    res.clearCookie('user_id')
+    res.redirect('/users/signup')
 }
