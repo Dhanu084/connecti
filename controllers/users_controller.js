@@ -1,7 +1,7 @@
 const User = require('../models/users');
 
 module.exports.profile = function(req,res){
-    res.end("<h1>User Profile</h1>");
+    res.render('userProfile');
 }
 
 module.exports.posts = function(req,res){
@@ -9,13 +9,18 @@ module.exports.posts = function(req,res){
 }
 
 module.exports.signup = function(req,res){
-    
+    if (req.isAuthenticated()){
+        res.redirect('/users/profile');
+    }
     return res.render('userSignUp',{
         title:'Connecti || Signup'
     })
 }
 
 module.exports.signin = function(req,res){
+    if (req.isAuthenticated()){
+        res.redirect('/users/profile');
+    }
     return res.render('userSignin',{
         title:'Connecti || Signin'
     })
@@ -49,6 +54,10 @@ module.exports.create = function(req,res){
 
 //signin and create session for the user
 module.exports.createSession = function(req,res){
-    console.log('hi')
-    
+    return res.redirect('/users/profile');    
+}
+
+module.exports.destroySession = function(req,res){
+    req.logout();
+    return res.redirect('/');
 }
