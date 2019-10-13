@@ -1,0 +1,35 @@
+header {
+  height: 10%;
+  background-color: #1386F6;
+  color: #ffffff;
+  display: flex;
+}
+
+header #app-name {
+  margin: auto;
+  height: 100%;
+  width: 80%;
+}
+
+header #auth-links {
+  height: 100%;
+  width: 20%;
+}
+
+header #auth-links ul {
+  list-style: none;
+}
+
+header #auth-links ul li {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+header #auth-links ul a {
+  color: white;
+  text-decoration: none;
+}
+
+header #auth-links ul a :hover {
+  color: grey;
+}

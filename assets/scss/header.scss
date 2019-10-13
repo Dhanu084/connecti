@@ -1,0 +1,30 @@
+header{
+    height: 10%;
+    background-color: #1386F6;
+    color: #ffffff;
+    display: flex;
+    #app-name{
+        margin: auto;
+        height: 100%;
+        width: 80%;
+    }
+    #auth-links{
+        height: 100%;
+        width: 20%;
+        ul{
+            list-style: none;
+            li{
+                display: inline-block;
+                margin-left:5px;
+            }
+            a{
+                color: white;
+                text-decoration: none;
+                :hover{
+                    color:grey;
+                }
+            }
+        }
+        
+    }
+}

@@ -1,0 +1,21 @@
+footer {
+  height: 15vh;
+  background-color: #1386F6;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+}
+
+footer #app-name {
+  height: 50%;
+  margin: auto;
+  font-size: 1.2rem;
+}
+
+footer #year {
+  height: 50%;
+  margin: auto;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,10 @@
+body {
+  margin: 0%;
+  font-family: sans-serif;
+  border: 1px solid black;
+}
+
+body main {
+  height: 75vh;
+  width: 100vw;
+}
