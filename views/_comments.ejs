@@ -1,5 +1,5 @@
 <li>
-        <%= console.log(comment.user) %>
+        
             <% if(locals.user && locals.user._id == comment.user.id){ %>
                 <small>
                     <a href="/comments/destroy/<%= comment._id %>">x</a>

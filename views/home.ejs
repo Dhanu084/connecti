@@ -2,8 +2,8 @@
 
     <head>
             <title><%= title %></title>
-        </head>
-    
+    </head>
+    <div id="home-container">
          <section id="feed-posts">
              <h4>Posts</h4>
              <% if(locals.user) { %>
@@ -12,7 +12,7 @@
                     <input type="submit" value="Post">
                 </form>
             <% } %>
-         </section>
+        
     
          <div id="viewPost">
                 
@@ -22,3 +22,14 @@
                 <% } %>
             </ul>
             </div>
+        </section>
+
+    <section id="user-friends">
+        <h4>Friends</h4>
+        <% for (f of all_users) { %>
+            <p>
+                <a href="/users/profile/<%= f.id %>"><%= f.name %></a>
+            </p>
+        <%}%>
+    </section>
+</div>

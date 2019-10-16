@@ -1,7 +1,24 @@
 const User = require('../models/users');
 
 module.exports.profile = function(req,res){
-    res.render('userProfile');
+    User.findById(req.params.id,function(err,user){
+        res.render('userProfile',{
+            profile_user:user
+        });
+    })
+    
+}
+
+module.exports.update=function(req,res){
+    console.log(req.body)
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            return res.redirect('back');
+        })
+    }
+    else{
+        return res.status(401).send('Unauthorized');
+    }
 }
 
 module.exports.posts = function(req,res){
@@ -22,13 +39,13 @@ module.exports.signin = function(req,res){
         res.redirect('/users/profile');
     }
     return res.render('userSignin',{
-        title:'Connecti || Signin'
+        title:'Connecti || Signin',
+        
     })
 }
 
 //get the signup data
 module.exports.create = function(req,res){
-    console.log(req.body,"hai")
     User.findOne({email:req.body.email},function(err,user){
         if(err){
             console.log('error');
@@ -54,7 +71,7 @@ module.exports.create = function(req,res){
 
 //signin and create session for the user
 module.exports.createSession = function(req,res){
-    return res.redirect('/users/profile');    
+    return res.redirect('/');    
 }
 
 module.exports.destroySession = function(req,res){
