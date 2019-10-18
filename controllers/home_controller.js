@@ -8,7 +8,7 @@ const User = require('../models/users');
 //     })
 // }
 
-module.exports.home = function(req,res){
+module.exports.home = async function(req,res){
     // Posts.find({},function(err,posts){
     //     if(err){
     //         console.log('Error in Finding the post');
@@ -20,21 +20,29 @@ module.exports.home = function(req,res){
     //     })
     // })
     //populate the user of each post
-    Posts.find({}).populate('User')
+    try{
+        let posts = await Posts.find({}).populate('User')
     .populate({
         path:'comments',
         populate:{
             path:'user'
         }
-    }).exec(function(err,posts){
-       User.find({},function(err,users){
-           res.render('home',{
-               title:'Connecti',
-               posts:posts,
-               all_users:users
-           });
-       });
-        
     })
+
+    let users= await User.find({});
+
+    return res.render('home',{
+        title:'Connecti|home',
+        posts:posts,
+        all_users:users,
+    })
+
+
+    }
+    catch(err){
+        console.log(err);
+        return 
+    }
+    
 }
 
